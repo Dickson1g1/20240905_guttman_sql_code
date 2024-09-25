@@ -32,6 +32,51 @@ USE testdb_20240919;
 
 -- Closing print statement
 SELECT '' AS 'Installation Completed, cheack for errors!!!';
+
+CREATE TABLE warehouse(
+        warehouse_id           INT,
+        warehouse_location     VARCHAR(20),
+
+        PRIMARY KEY(warehouse_id)
+);
+
+DROP TABLE IF EXISTS deliveries;
+
+CREATE TABLE deliveries(
+        delivery_id     INT,     AUTO_INCREMENT,
+        delivery_date   DATE,
+        warehouse_id    INT,
+
+
+        PRIMARY KEY(delivery_id),
+        FOREIGN KEY(warehouse_id) REFERENCES warehouse(warehouse_id),
+);
+
+DROP TABLE IF EXISTS product;
+
+CREATE TABLE product(
+        product_id       INT        AUTO_INCREMENT,
+        product_name     VARCHAR(20),
+        product_price    INT,
+        warehouse_id     INT,
+
+        PRIMARY KEY(product_name),
+        FOREIGN KEY(warehouse_id) REFERENCES warehouse(warehouse_id)
+);
+
+DROP TABLE IF EXISTS order_info;
+
+CREATE TABLE order_info(
+        order_info_id        INT    AUTO_INCREMENT,
+        product_id           INT,
+        product_quantity     INT,
+
+        PRIMARY KEY(order_info_id),
+        FOREIGN KEY(product_id) REFERENCES product(product_id)
+);
+
+DROP TABLE IF EXISTS order;
+
 CREATE TABLE orders(
         order_id        INT     AUTO_INCREMENT,
         order_date      DATE,
