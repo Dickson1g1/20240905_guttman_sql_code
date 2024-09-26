@@ -35,7 +35,7 @@ SELECT '' AS 'Installation Completed, check for errors!!!';
 DROP TABLE IF EXISTS ORDERITEM;
 DROP TABLE IF EXISTS PRODUCT;
 DROP TABLE IF EXISTS `ORDER`;  -- Use backticks for reserved keywords
-DROP TABLE IF EXISTS CUSTORMER;
+DROP TABLE IF EXISTS CUSTOMER;  -- Corrected spelling from CUSTORMER to CUSTOMER
 DROP TABLE IF EXISTS SUPPLIER;
 
 CREATE TABLE SUPPLIER(
@@ -49,7 +49,7 @@ CREATE TABLE SUPPLIER(
     PRIMARY KEY(SupplierId)
 );
 
-CREATE TABLE CUSTORMER(
+CREATE TABLE CUSTOMER(
     CustomerId       INT AUTO_INCREMENT,
     FirstName        VARCHAR(20),
     LastName         VARCHAR(30),
@@ -61,31 +61,31 @@ CREATE TABLE CUSTORMER(
 
 CREATE TABLE PRODUCT(
     ProductId        INT AUTO_INCREMENT,
-    productName      VARCHAR(40),
+    ProductName      VARCHAR(40),  -- Capitalized for consistency
     SupplierId       INT,
-    UnitPrice        DECIMAL(10,4),
+    UnitPrice        DECIMAL(10, 4),
     Package          VARCHAR(50),
-    IsDiscontinued   ENUM(‘Y’,’N’) DEFAULT ‘N’,
+    IsDiscontinued   ENUM('Y', 'N') DEFAULT 'N',  -- Fixed quotes
     PRIMARY KEY(ProductId),
     FOREIGN KEY(SupplierId) REFERENCES SUPPLIER(SupplierId)
 );
 
 CREATE TABLE `ORDER`(
     OrderId          INT AUTO_INCREMENT,
-    OrderData        DATE,
+    OrderDate        DATE,  -- Corrected from OrderData to OrderDate for clarity
     CustomerId       INT,
-    TotalAmount      INT,
+    TotalAmount      DECIMAL(10, 2),  -- Changed to DECIMAL for currency
     PRIMARY KEY(OrderId),
-    FOREIGN KEY(CustomerId) REFERENCES CUSTORMER(CustomerId)
+    FOREIGN KEY(CustomerId) REFERENCES CUSTOMER(CustomerId)
 );
 
 CREATE TABLE ORDERITEM(
-    OrderitemId      INT AUTO_INCREMENT,
+    OrderItemId      INT AUTO_INCREMENT,  -- Capitalized for consistency
     OrderId          INT,
     ProductId        INT,
-    UnitPrice        INT,
+    UnitPrice        DECIMAL(10, 2),  -- Changed to DECIMAL for currency
     Quantity         INT,
-    PRIMARY KEY(OrderitemId),
+    PRIMARY KEY(OrderItemId),
     FOREIGN KEY(OrderId) REFERENCES `ORDER`(OrderId),
     FOREIGN KEY(ProductId) REFERENCES PRODUCT(ProductId)
 );

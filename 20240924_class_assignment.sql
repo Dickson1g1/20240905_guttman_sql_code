@@ -65,7 +65,7 @@ CREATE TABLE PRODUCT(
     SupplierId       INT,
     UnitPrice        DECIMAL(10,4),
     Package          VARCHAR(50),
-    IsDiscontinued   ENUM(‘Y’,’N’) DEFAULT ‘N’,
+    IsDiscontinued   ENUM('Y', 'N') DEFAULT 'N',
     PRIMARY KEY(ProductId),
     FOREIGN KEY(SupplierId) REFERENCES SUPPLIER(SupplierId)
 );
