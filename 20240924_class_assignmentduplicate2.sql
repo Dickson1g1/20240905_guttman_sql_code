@@ -40,32 +40,32 @@ DROP TABLE IF EXISTS SUPPLIER;
 
 CREATE TABLE SUPPLIER(
     SupplierId       INT AUTO_INCREMENT,
-    CompanyName      VARCHAR(20),
-    ContactName      VARCHAR(20),
-    City             VARCHAR(20),
-    Country          VARCHAR(20),
-    Phone            INT,
-    Fax              INT,
+    CompanyName      VARCHAR(255),
+    ContactName      VARCHAR(30),
+    City             VARCHAR(15),
+    Country          VARCHAR(15),
+    Phone            VARCHAR(24),
+    Fax              VARCHAR(24),
     PRIMARY KEY(SupplierId)
 );
 
 CREATE TABLE CUSTORMER(
     CustomerId       INT AUTO_INCREMENT,
     FirstName        VARCHAR(20),
-    LastName         VARCHAR(20),
-    City             VARCHAR(20),
-    Country          VARCHAR(20),
-    Phone            INT,
+    LastName         VARCHAR(30),
+    City             VARCHAR(15),
+    Country          VARCHAR(15),
+    Phone            VARCHAR(24),
     PRIMARY KEY(CustomerId)
 );
 
 CREATE TABLE PRODUCT(
     ProductId        INT AUTO_INCREMENT,
-    productName      VARCHAR(20),
+    productName      VARCHAR(40),
     SupplierId       INT,
-    UnitPrice        INT,
-    Package          INT,
-    IsDiscontinued   INT,
+    UnitPrice        DECIMAL(10,4),
+    Package          VARCHAR(50),
+    IsDiscontinued   ENUM(‘Y’,’N’) DEFAULT ‘N’,
     PRIMARY KEY(ProductId),
     FOREIGN KEY(SupplierId) REFERENCES SUPPLIER(SupplierId)
 );
