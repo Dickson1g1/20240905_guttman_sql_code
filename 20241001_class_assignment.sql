@@ -1,6 +1,6 @@
 /* SQL installation script: Creating User and Roles on MySQL
-  Name: Dickson Boakye                      Date Created:02/03/2024
-                                            Date Modificed:09/28/2024
+  Name: Dickson Boakye      Date Created:02/03/2024
+                            Date Modificed:09/28/2024
   Purpose: This script creates user, create roles and configures their
             permissions
 */
@@ -21,8 +21,8 @@ DROP USER IF EXISTS 'test_user_05'@'localhost';
 
 SELECT '' AS 'Creating user';
 -- Create a root user
-CREATE USER IF NOT EXISTS 'guttman_root'@'localhost'
-        IDENTIFIED BY  'grizzlies_2024'
+CREATE USER IF NOT EXISTS  'guttman_root'@'localhost'
+        IDENTIFIED BY  ''
         PASSWORD REQUIRE CURRENT;
 
 -- Create test users
@@ -40,10 +40,10 @@ CREATE USER IF NOT EXISTS 'test_user_02'@'localhost'
 -- Account Resource Limits
         WITH MAX_QUERIES_PER_HOUR 40
              MAX_UPDATES_PER_HOUR 10
-             MAX_CONNECTTIONS 2
-
+             MAX_CONNECTIONS_PER_HOUR 75
+             MAX_USER_CONNECTIONS 2
 -- More restrictive password settings
-        FAILES_LOGIN_ATTEMPTS 1
+        FAILED_LOGIN_ATTEMPTS 1
         PASSWORD_LOCK_TIME UNBOUNDED
         PASSWORD EXPIRE INTERVAL 30 DAY
         PASSWORD HISTORY 25
@@ -64,24 +64,24 @@ CREATE ROLE IF NOT EXISTS 'read_only_employees_db',
                           'read_department-info';
 
 
-SELECT '' AS 'Granting privilages';
+SELECT '' AS 'Granting privileges';
 
--- Give the user root privilages
+-- Give the user root privileges
 GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT, REFERENCES, RELOAD
     ON *.* TO 'guttman_root'@'localhost' WITH GRANT OPTION;
 
--- Give test user 01 full privilages to testdb_20240919
--- Give test user 01 SELECT privilages to only department table in
+-- Give test user 01 full privileges to testdb_20240919
+-- Give test user 01 SELECT privileges to only department table in
 -- employees database
 
-GRANT ALL PRIVILAGES
+GRANT ALL PRIVILEGES
     ON testdb_20240919.* TO 'test_user_01'@'localhost';
 
 GRANT SELECT
-    ON employees.department TO 'test_user_01'@'localhost';
+    ON employees.departments TO 'test_user_01'@'localhost';
 
--- Give test user 02 full privilages to all tables in employees database
-GRANT ALL PRIVILAGES
+-- Give test user 02 full privileges to all tables in employees database
+GRANT ALL PRIVILEGES
     ON employees.* TO 'test_user_02'@'localhost';
 
 /*Give SELECT to all tables in employees database for role
@@ -133,7 +133,7 @@ FROM mysql.user;
 
 /* Force MYSQL to update the changes to the user privilages
 */
-FLUSH PRIVILAGES;
+FLUSH PRIVILEGES;
 
 /* See all users created
 */
