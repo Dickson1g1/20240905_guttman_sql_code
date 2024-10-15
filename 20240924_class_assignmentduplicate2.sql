@@ -4,9 +4,12 @@
   Purpose:
 
 */
+
+SYSTEM CLS;
 -- Opening print statement
 SELECT '' AS 'Installation Starting!!!';
 
+SELECT USER() AS 'INSTALL USER';
 
 -- Remove the database if it is already there
 DROP DATABASE IF EXISTS testdb_20240924;

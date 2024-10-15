@@ -22,7 +22,7 @@ DROP USER IF EXISTS 'test_user_05'@'localhost';
 SELECT '' AS 'Creating user';
 -- Create a root user
 CREATE USER IF NOT EXISTS  'guttman_root'@'localhost'
-        IDENTIFIED BY  ''
+        IDENTIFIED BY  'grizzlies_2024'
         PASSWORD REQUIRE CURRENT;
 
 -- Create test users
@@ -59,9 +59,9 @@ CREATE USER IF NOT EXISTS 'test_user_05'@'localhost'
 -- DROP and Create roles
 SELECT '' AS 'CREATING ROLES';
 DROP  ROLE IF EXISTS  'read_only_employees_db',
-                      'read_department-info';
+                      'read_departments-info';
 CREATE ROLE IF NOT EXISTS 'read_only_employees_db',
-                          'read_department-info';
+                          'read_departments-info';
 
 
 SELECT '' AS 'Granting privileges';
@@ -96,12 +96,12 @@ GRANT SELECT
           read_department_info
 */
 GRANT SELECT
-    ON employees.department
-    TO 'read_department_info';
+    ON employees.departments
+    TO 'read_departments_info';
 
 GRANT 'read_only_employees_db'
       TO 'test_user_03'@'localhost';
-GRANT 'read_department_info'
+GRANT 'read_departments_info'
       TO  'test_user_04'@'localhost',
           'test_user_05'@'localhost';
 
@@ -119,12 +119,12 @@ SET DEFAULT ROLE ALL TO
    properly created.
 */
 
-SHOW GRANT FOR 'guttman_root'@'localhost';
-SHOW GRANT FOR 'test_user_01'@'localhost';
-SHOW GRANT FOR 'test_user_02'@'localhost';
-SHOW GRANT FOR 'test_user_03'@'localhost' USING 'read_only_employees_db';
-SHOW GRANT FOR 'test_user_04'@'localhost' USING 'read_department_info';
-SHOW GRANT FOR 'test_user_05'@'localhost' USING 'read_department_info';
+SHOW GRANTS FOR 'guttman_root'@'localhost';
+SHOW GRANTS FOR 'test_user_01'@'localhost';
+SHOW GRANTS FOR 'test_user_02'@'localhost';
+SHOW GRANTS FOR 'test_user_03'@'localhost' USING 'read_only_employees_db';
+SHOW GRANTS FOR 'test_user_04'@'localhost' USING 'read_departments_info';
+SHOW GRANTS FOR 'test_user_05'@'localhost' USING 'read_departments_info';
 
 /* See all the users create
 */
