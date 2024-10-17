@@ -6,6 +6,7 @@
 */
 
 
+
 -- Opening print statement
 SELECT '' AS 'Installation Starting!!!';
 
@@ -94,7 +95,7 @@ CREATE TABLE salestransaction(
 );
 
 CREATE TABLE `product`(
-    productId          CHAR(3) NOT NULL,
+    productId          INT AUTO_INCREMENT,  -- Changed to INT for AUTO_INCREMENT
     productname        VARCHAR(25),
     productprice       DECIMAL(7, 2),
     vendorId           CHAR(2),
@@ -106,7 +107,7 @@ CREATE TABLE `product`(
 
 CREATE TABLE soldvia(
     soldviaId          INT AUTO_INCREMENT,
-    productId          CHAR(3),
+    productId          INT,  -- Changed to INT to match productId type
     tId                VARCHAR(8),
     noofitems          INT,
     PRIMARY KEY(soldviaId),
