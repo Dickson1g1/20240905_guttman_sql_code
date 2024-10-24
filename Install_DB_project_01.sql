@@ -5,7 +5,7 @@
 
 */
 
-
+SYSTEM CLS;
 -- Opening print statement
 SELECT '' AS 'Installation Starting!!!';
 
