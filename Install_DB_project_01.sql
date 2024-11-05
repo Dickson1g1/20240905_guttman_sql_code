@@ -1,7 +1,7 @@
 /* SQL installation script
-  Name: Class Project.                    Date Created: 10/15/2024
-                                          Date Modified:
-  Purpose: For database class project 1.
+  Name:Class Project 1                     Date Created:
+                                           Date Modified:
+  Purpose:
 
 */
 
@@ -28,7 +28,7 @@ CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 
 -- Let's see if the database is created
 SHOW DATABASES;
-SELECT '' AS '###############################';
+SELECT '' AS 'DATABASE CREATION COMPLETED';
 
 
 -- Let's enter the database
@@ -43,10 +43,10 @@ SELECT '' AS 'Installation Completed, check for errors!!!';
 
 DROP TABLE IF EXISTS soldvia;
 DROP TABLE IF EXISTS salestransaction;
-DROP TABLE IF EXISTS `product`;  -- Use backticks for reserved keywords
-DROP TABLE IF EXISTS `vendor`;   -- Use backticks for reserved keywords
+DROP TABLE IF EXISTS `product`;  -- Used backticks for reserved keywords
+DROP TABLE IF EXISTS `vendor`;   -- Used backticks for reserved keywords
 DROP TABLE IF EXISTS category;
-DROP TABLE IF EXISTS `customer`; -- Use backticks for reserved keywords
+DROP TABLE IF EXISTS `customer`; -- Used backticks for reserved keywords
 DROP TABLE IF EXISTS store;
 DROP TABLE IF EXISTS region;
 
@@ -113,3 +113,5 @@ CREATE TABLE soldvia(
     FOREIGN KEY(productId) REFERENCES `product`(productId),
     FOREIGN KEY(tId) REFERENCES salestransaction(tId)
 );
+
+show tables; -- to show the tables at the end when it finish runing. 
