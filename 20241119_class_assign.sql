@@ -41,7 +41,7 @@ AS
       e.emp_no AS 'Employee',
       d.dept_no AS 'Department_Number',
       d.dept_name AS 'Department_Name',
-      de.from_date AS 'dept_date'
+      de.from_date AS 'dept_date',
       NOW() AS 'Day_Time'
   FROM
       employees.employees e
@@ -57,10 +57,7 @@ LIMIT 10;
 
 -- Remove function if it already EXISTS
 DROP FUNCTION IF EXISTS usf_get_max_date;
-
--- Create procedure
 DELIMITER $$
-
 CREATE FUNCTION IF NOT EXISTS usf_get_max_date(e_emp_no INT)
       RETURNS DATE DETERMINISTIC
 BEGIN
