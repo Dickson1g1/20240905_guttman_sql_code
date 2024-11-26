@@ -13,7 +13,7 @@ SELECT USER() AS 'INSTALL USER';
 
 
 -- Remove the database if it is already there
-DROP DATABASE IF EXISTS testdb_20241015;
+DROP DATABASE IF EXISTS my_project_db1;
 
 /* Create the database after checking to make sure it is
   not already there
@@ -22,7 +22,7 @@ DROP DATABASE IF EXISTS testdb_20241015;
 
 
 -- The following line is pure Standard SQL
-CREATE DATABASE IF NOT EXISTS testdb_20241015
+CREATE DATABASE IF NOT EXISTS my_project_db1
 CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 
 
@@ -32,7 +32,7 @@ SELECT '' AS 'DATABASE CREATION COMPLETED';
 
 
 -- Let's enter the database
-USE testdb_20241015;
+USE my_project_db1;
 
 
 -- Let's create some tables
@@ -41,13 +41,7 @@ USE testdb_20241015;
 -- Closing print statement
 SELECT '' AS 'Installation Completed, check for errors!!!';
 
-DROP TABLE IF EXISTS soldvia;
-DROP TABLE IF EXISTS salestransaction;
-DROP TABLE IF EXISTS `product`;  -- Used backticks for reserved keywords
-DROP TABLE IF EXISTS `vendor`;   -- Used backticks for reserved keywords
-DROP TABLE IF EXISTS category;
-DROP TABLE IF EXISTS `customer`; -- Used backticks for reserved keywords
-DROP TABLE IF EXISTS store;
+
 DROP TABLE IF EXISTS region;
 
 CREATE TABLE region(
@@ -55,6 +49,8 @@ CREATE TABLE region(
     regionname         VARCHAR(25),
     PRIMARY KEY(regionId)
 );
+
+DROP TABLE IF EXISTS store;
 
 CREATE TABLE store(
     storeId            VARCHAR(3) NOT NULL,  -- Added NOT NULL
@@ -64,6 +60,8 @@ CREATE TABLE store(
     FOREIGN KEY(regionId) REFERENCES region(regionId)
 );
 
+DROP TABLE IF EXISTS `customer`; -- Used backticks for reserved keywords
+
 CREATE TABLE `customer`(
     customerId         CHAR(7) NOT NULL,  -- Added NOT NULL
     customername       VARCHAR(15),
@@ -71,17 +69,24 @@ CREATE TABLE `customer`(
     PRIMARY KEY(customerId)
 );
 
+DROP TABLE IF EXISTS category;
+
 CREATE TABLE category(
     categoryId         CHAR(2) NOT NULL,  -- Added NOT NULL
     categoryname       VARCHAR(25),
     PRIMARY KEY(categoryId)
 );
 
+
+DROP TABLE IF EXISTS `vendor`;   -- Used backticks for reserved keywords
+
 CREATE TABLE `vendor`(
     vendorId           CHAR(2) NOT NULL,  -- Added NOT NULL
     vendorname         VARCHAR(25),
     PRIMARY KEY(vendorId)
 );
+
+DROP TABLE IF EXISTS salestransaction;
 
 CREATE TABLE salestransaction(
     tId                VARCHAR(8) NOT NULL,  -- Added NOT NULL
@@ -92,6 +97,8 @@ CREATE TABLE salestransaction(
     FOREIGN KEY(customerId) REFERENCES `customer`(customerId),
     FOREIGN KEY(storeId) REFERENCES store(storeId)
 );
+
+DROP TABLE IF EXISTS `product`;  -- Used backticks for reserved keywords
 
 CREATE TABLE `product`(
     productId          CHAR(3) NOT NULL,
@@ -104,6 +111,8 @@ CREATE TABLE `product`(
     FOREIGN KEY(categoryId) REFERENCES category(categoryId)
 );
 
+DROP TABLE IF EXISTS soldvia;
+
 CREATE TABLE soldvia(
     soldviaId          INT AUTO_INCREMENT,
     productId          CHAR(3),
@@ -114,4 +123,4 @@ CREATE TABLE soldvia(
     FOREIGN KEY(tId) REFERENCES salestransaction(tId)
 );
 
-show tables; -- to show the tables at the end when it finish runing. 
+show tables; -- to show the tables at the end when it finish runing.
